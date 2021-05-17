@@ -8,21 +8,14 @@ interface GenreResponseProps {
   title: string;
 }
 
-interface MovieProps {
-  imdbID: string;
-  Title: string;
-  Poster: string;
-  Ratings: Array<{
-    Source: string;
-    Value: string;
-  }>;
-  Runtime: string;
+interface SideProps {
+  genres: Array<GenreResponseProps>;
+  handleClickButton: (id: number) => void;
+  selectedGenreId: number;
 }
 
-export function SideBar(props) {
-  const genres = props.genres
 
-  console.log('genres => ', genres)
+export function SideBar({genres, handleClickButton, selectedGenreId}:SideProps) {
 
    return (
      <nav className="sidebar">
@@ -35,8 +28,8 @@ export function SideBar(props) {
               key={String(genre.id)}
               title={genre.title}
               iconName={genre.name}
-              onClick={() => props.handleClickButton(genre.id)}
-              selected={props.selectedGenreId === genre.id}
+              onClick={() => handleClickButton(genre.id)}
+              selected={selectedGenreId === genre.id}
             />
           ))}
         </div>
